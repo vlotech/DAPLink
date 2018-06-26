@@ -41,6 +41,7 @@ void gpio_set_cdc_led(gpio_led_state_t state);
 void gpio_set_msc_led(gpio_led_state_t state);
 uint8_t gpio_get_reset_btn_no_fwrd(void);
 uint8_t gpio_get_reset_btn_fwrd(void);
+uint8_t gpio_get_sw_reset(void);
 
 static inline uint8_t gpio_get_reset_btn(void)
 {

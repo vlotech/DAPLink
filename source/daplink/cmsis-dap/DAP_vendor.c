@@ -69,18 +69,7 @@ uint32_t DAP_ProcessVendorCommand(const uint8_t *request, uint8_t *response) {
     case ID_DAP_Vendor5:  break;
     case ID_DAP_Vendor6:  break;
     case ID_DAP_Vendor7:  break;
-    case ID_DAP_Vendor8: {
-        *response = 1;
-        if (0 == *request) {
-            main_usb_set_test_mode(false);
-        } else if (1 == *request) {
-            main_usb_set_test_mode(true);
-        } else {
-            *response = 0;
-        }
-        num += (1U << 16) | 1U; // increment request and response count each by 1
-        break;
-    }
+    case ID_DAP_Vendor8:  break; // FIXME: remove ID_DAP_Vendor8 handle temporarily 
     case ID_DAP_Vendor9:  break;
     case ID_DAP_Vendor10: break;
     case ID_DAP_Vendor11: break;

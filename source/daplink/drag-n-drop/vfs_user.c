@@ -42,11 +42,11 @@ static const uint32_t disc_size = MB(64);
 
 static const char mbed_redirect_file[] =
     "<!doctype html>\r\n"
-    "<!-- mbed Platform Website and Authentication Shortcut -->\r\n"
+    "<!-- Particle Platform Website and Authentication Shortcut -->\r\n"
     "<html>\r\n"
     "<head>\r\n"
     "<meta charset=\"utf-8\">\r\n"
-    "<title>mbed Website Shortcut</title>\r\n"
+    "<title>Particle Website Shortcut</title>\r\n"
     "</head>\r\n"
     "<body>\r\n"
     "<script>\r\n"
@@ -86,7 +86,7 @@ void vfs_user_build_filesystem()
     vfs_file_t file_handle;
     // Setup the filesystem based on target parameters
     vfs_init(daplink_drive_name, disc_size);
-    // MBED.HTM
+    // PARTICLE.HTM
     file_size = get_file_size(read_file_mbed_htm);
     vfs_create_file(daplink_url_name, read_file_mbed_htm, 0, file_size);
     // DETAILS.TXT
@@ -126,7 +126,7 @@ void vfs_user_file_change_handler(const vfs_filename_t filename, vfs_file_change
 {
     // Allow settings to be changed if automation mode is
     // enabled or if the user is holding the reset button
-    bool btn_pressed = gpio_get_reset_btn();
+    bool btn_pressed = !gpio_get_sw_reset();
 
     if (!btn_pressed && !config_get_automation_allowed()) {
         return;
@@ -230,7 +230,7 @@ static uint32_t read_file_details_txt(uint32_t sector_offset, uint8_t *data, uin
     }
 
     pos = 0;
-    pos += util_write_string(buf + pos, "# DAPLink Firmware - see https://mbed.com/daplink\r\n");
+    pos += util_write_string(buf + pos, "# DAPLink Firmware\r\n");
     // Unique ID
     pos += util_write_string(buf + pos, "Unique ID: ");
     pos += util_write_string(buf + pos, info_get_unique_id());

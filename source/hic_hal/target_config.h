@@ -58,6 +58,8 @@ typedef struct target_cfg {
 } target_cfg_t;
 
 extern target_cfg_t target_device;
+extern target_cfg_t target_device_nrf52;
+extern target_cfg_t target_device_nrf52840;
 
 #ifdef __cplusplus
 }
