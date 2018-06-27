@@ -260,6 +260,8 @@ static uint32_t read_file_details_txt(uint32_t sector_offset, uint8_t *data, uin
     pos += util_write_string(buf + pos, info_get_version());
     pos += util_write_string(buf + pos, "\r\n");
 
+    // TODO: Display both bootloader and interface version
+#if 0 
     // Other builds version (bl or if)
     if (!daplink_is_bootloader() && info_get_bootloader_present()) {
         pos += util_write_string(buf + pos, "Bootloader Version: ");
@@ -272,11 +274,13 @@ static uint32_t read_file_details_txt(uint32_t sector_offset, uint8_t *data, uin
         pos += util_write_uint32_zp(buf + pos, info_get_interface_version(), 4);
         pos += util_write_string(buf + pos, "\r\n");
     }
-
-    // GIT sha
-    pos += util_write_string(buf + pos, "Git SHA: ");
-    pos += util_write_string(buf + pos, GIT_COMMIT_SHA);
-    pos += util_write_string(buf + pos, "\r\n");
+#endif
+    
+    // // GIT sha
+    // pos += util_write_string(buf + pos, "Git SHA: ");
+    // pos += util_write_string(buf + pos, GIT_COMMIT_SHA);
+    // pos += util_write_string(buf + pos, "\r\n");
+    
     // Local modifications when making the build
     pos += util_write_string(buf + pos, "Local Mods: ");
     pos += util_write_uint32(buf + pos, GIT_LOCAL_MODS);
