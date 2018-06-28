@@ -47,6 +47,9 @@ module:
     hic_sam3u2c: &module_hic_sam3u2c
         - records/rtos/rtos-cm3.yaml
         - records/hic_hal/sam3u2c.yaml
+    hic_gd32f103cb: &module_hic_gd32f103cb
+        - records/rtos/rtos-cm3.yaml
+        - records/hic_hal/gd32f103cb.yaml
 
 projects:
     kl26z_bl:
@@ -65,6 +68,10 @@ projects:
         - *module_bl
         - *module_hic_sam3u2c
         - records/board/sam3u2c_bl.yaml
+    gd32f103cb_bl:
+        - *module_bl
+        - *module_hic_gd32f103cb
+        - records/board/gd32f103cb_bl.yaml
     sam3u2c_mkit_dk_dongle_nrf5x_if:
         - *module_if
         - *module_hic_sam3u2c
@@ -357,3 +364,7 @@ projects:
         - *module_if
         - *module_hic_lpc11u35
         - records/board/mtb_wise1570.yaml
+    gd32f103cb_debugger_if:
+        - *module_if
+        - *module_hic_gd32f103cb
+        - records/board/debugger.yaml

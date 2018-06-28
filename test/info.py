@@ -171,6 +171,7 @@ SUPPORTED_CONFIGURATIONS = [
     (   0x1237,     'sam3u2c_ublox_evk_nina_b1_if',            'sam3u2c_bl',        'U-BLOX-EVK-NINA-B1'                    ),
     (   0xC006,     'lpc11u35_vbluno51_if',                     None,               'VNG-VBLUno51'                          ),
     (   0xC005,     'lpc11u35_mtconnect04s_if',                 None,               'MtConnect04S'                          ),
+    (   0x1093,     'gd32f103cb_debugger_if',                  'gd32f103cb_bl',     'Debugger'                              ),
 ]
 
 # Add new HICs here
@@ -180,6 +181,7 @@ HIC_STRING_TO_ID = {
     'lpc11u35': 0x97969902,
     'sam3u2c': 0x97969903,
     'lpc4322': 0x97969905,
+    'gd32f103': 0x97969906,
 }
 
 BOARD_ID_LOCKED_WHEN_ERASED = set([
