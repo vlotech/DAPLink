@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-#include "flash_hal.h"        // FlashOS Structures       //TODO - uncomment
+#include "flash_hal.h"        // FlashOS Structures
 #include "target_config.h"    // target_device
 #include "gd32f10x.h"
 

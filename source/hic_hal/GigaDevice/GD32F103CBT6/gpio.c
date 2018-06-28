@@ -149,3 +149,7 @@ void target_forward_reset(bool assert_reset)
 {
     // Do nothing
 }
+
+void gpio_set_board_power(bool powerEnabled)
+{
+}

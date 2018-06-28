@@ -1,6 +1,6 @@
 /**
- * @file    usb_config.h
- * @brief
+ * @file    usb_config.c
+ * @brief   
  *
  * DAPLink Interface Firmware
  * Copyright (c) 2009-2016, ARM Limited, All Rights Reserved
@@ -28,7 +28,7 @@
 
 //   <o0.0> High-speed
 //     <i> Enable high-speed functionality (if device supports it)
-#define USBD_HS_ENABLE              1
+#define USBD_HS_ENABLE              0
 
 //   <h> Device Settings
 //     <i> These settings affect Device Descriptor
@@ -50,7 +50,7 @@
 #define USBD_MAX_PACKET0            64
 #define USBD_DEVDESC_IDVENDOR       0x0D28
 #define USBD_DEVDESC_IDPRODUCT      0x0204
-#define USBD_DEVDESC_BCDDEVICE      0x0100 //was 0x0100
+#define USBD_DEVDESC_BCDDEVICE      0x0200
 
 //   <h> Configuration Settings
 //     <i> These settings affect Configuration Descriptor
@@ -305,10 +305,10 @@
 #define USBD_CDC_ACM_EP_INTIN           3
 #define USBD_CDC_ACM_EP_INTIN_STACK     0
 #define USBD_CDC_ACM_WMAXPACKETSIZE     16
-#define USBD_CDC_ACM_BINTERVAL          32
+#define USBD_CDC_ACM_BINTERVAL          1
 #define USBD_CDC_ACM_HS_ENABLE          0
 #define USBD_CDC_ACM_HS_WMAXPACKETSIZE  16
-#define USBD_CDC_ACM_HS_BINTERVAL       2
+#define USBD_CDC_ACM_HS_BINTERVAL       1
 #define USBD_CDC_ACM_EP_BULKIN          4
 #define USBD_CDC_ACM_EP_BULKOUT         4
 #define USBD_CDC_ACM_EP_BULKIN_STACK    0
@@ -316,8 +316,8 @@
 #define USBD_CDC_ACM_HS_ENABLE1         0
 #define USBD_CDC_ACM_HS_WMAXPACKETSIZE1 16
 #define USBD_CDC_ACM_HS_BINTERVAL1      0
-#define USBD_CDC_ACM_CIF_STRDESC        L"mbed Serial Port"
-#define USBD_CDC_ACM_DIF_STRDESC        L"mbed Serial Port"
+#define USBD_CDC_ACM_CIF_STRDESC        L"Particle Serial Port"
+#define USBD_CDC_ACM_DIF_STRDESC        L"Particle Serial Port"
 #define USBD_CDC_ACM_SENDBUF_SIZE       64
 #define USBD_CDC_ACM_RECEIVEBUF_SIZE    64
 #if (((USBD_CDC_ACM_HS_ENABLE1) && (USBD_CDC_ACM_SENDBUF_SIZE    < USBD_CDC_ACM_HS_WMAXPACKETSIZE1)) || (USBD_CDC_ACM_SENDBUF_SIZE    < USBD_CDC_ACM_WMAXPACKETSIZE1))
@@ -365,10 +365,10 @@
 
 #if    (USBD_HID_ENABLE)
 #if    (USBD_MSC_ENABLE)
-#if ((((USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKIN)  || \
-       (USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKIN)))|| \
-      ((USBD_HID_EP_INTOUT  != 0)                   && \
-       (USBD_HID_EP_INTOUT  == USBD_MSC_EP_BULKIN)  || \
+#if ((((USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKIN)      || \
+       (USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKOUT)))   || \
+      ((USBD_HID_EP_INTOUT  != 0)                       && \
+       (USBD_HID_EP_INTOUT  == USBD_MSC_EP_BULKIN)      || \
        (USBD_HID_EP_INTOUT  == USBD_MSC_EP_BULKOUT)))
 #error "HID and Mass Storage Device Interface can not use same Endpoints!"
 #endif

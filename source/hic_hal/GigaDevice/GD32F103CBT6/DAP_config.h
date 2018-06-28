@@ -1,6 +1,6 @@
 /**
  * @file    DAP_config.h
- * @brief
+ * @brief   
  *
  * DAPLink Interface Firmware
  * Copyright (c) 2009-2016, ARM Limited, All Rights Reserved
@@ -49,7 +49,7 @@ Provides definitions about:
 /// Port write operations in the Debug Unit by a Cortex-M MCU. Most Cortex-M processors
 /// requrie 2 processor cycles for a I/O Port Write operation.  If the Debug Unit uses
 /// a Cortex-M0+ processor with high-speed peripheral I/O only 1 processor cycle might be
-/// requrired.
+/// required.
 #define IO_PORT_WRITE_CYCLES    2               ///< I/O Cycles: 2=default, 1=Cortex-M0+ fast I/0
 
 /// Indicate that Serial Wire Debug (SWD) communication mode is available at the Debug Access Port.
@@ -76,13 +76,13 @@ Provides definitions about:
 /// Maximum Package Size for Command and Response data.
 /// This configuration settings is used to optimized the communication performance with the
 /// debugger and depends on the USB peripheral. Change setting to 1024 for High-Speed USB.
-#define DAP_PACKET_SIZE        64              ///< USB: 64 = Full-Speed, 1024 = High-Speed.
+#define DAP_PACKET_SIZE         64              ///< USB: 64 = Full-Speed, 1024 = High-Speed.
 
 /// Maximum Package Buffers for Command and Response data.
 /// This configuration settings is used to optimized the communication performance with the
 /// debugger and depends on the USB peripheral. For devices with limited RAM or USB buffer the
 /// setting can be reduced (valid range is 1 .. 255). Change setting to 4 for High-Speed USB.
-#define DAP_PACKET_COUNT       4              ///< Buffers: 64 = Full-Speed, 4 = High-Speed.
+#define DAP_PACKET_COUNT        4              ///< Buffers: 64 = Full-Speed, 4 = High-Speed.
 
 /// Indicate that UART Serial Wire Output (SWO) trace is available.
 /// This information is returned by the command \ref DAP_Info as part of <b>Capabilities</b>.
@@ -98,7 +98,6 @@ Provides definitions about:
 /// SWO Trace Buffer Size.
 #define SWO_BUFFER_SIZE         4096U           ///< SWO Trace Buffer Size in bytes (must be 2^n)
 
-
 /// Debug Unit is connected to fixed Target Device.
 /// The Debug Unit may be part of an evaluation board and always connected to a fixed
 /// known device.  In this case a Device Vendor and Device Name string is stored which
@@ -113,7 +112,7 @@ Provides definitions about:
 ///@}
 
 static __inline void pin_out(GPIO_TypeDef* GPIOx, uint8_t pin_bit)
-{        
+{
     // MODE : 00 input mode                 CMF : 00 analog input
     //        01 output speed_10MHz               01 float input
     //        10 output speed_2MHz                10 pullup/pulldown input
@@ -134,10 +133,10 @@ static __inline void pin_in(GPIO_TypeDef* GPIOx, uint8_t pin_bit, uint8_t mode)
 {
     // mode : 0     analog input
     //        1     float input
-    //        2     pullup input 
+    //        2     pullup input
     //        3     pulldowm input
     uint8_t config;
-    
+
     if(mode == 1)
         config = 0x04;
     else if(mode == 2)
@@ -146,7 +145,7 @@ static __inline void pin_in(GPIO_TypeDef* GPIOx, uint8_t pin_bit, uint8_t mode)
         config = 0x08;
     else
         config = 0x00;
-    
+
     if(pin_bit >= 8) {
         GPIOx->CTLR2 &= ~(0x0000000F << ((pin_bit-8) << 2));
         GPIOx->CTLR2 |= (((uint32_t)(config) & 0x0F) << ((pin_bit-8) << 2));
@@ -227,7 +226,7 @@ static __inline void PORT_SWD_SETUP(void)
     pin_in(SWDIO_IN_PIN_PORT, SWDIO_IN_PIN_Bit, 2);
     // Set nRESET HIGH
     pin_out(nRESET_PIN_PORT, nRESET_PIN_Bit);
-    nRESET_PIN_PORT->BOR = nRESET_PIN;    
+    nRESET_PIN_PORT->BOR = nRESET_PIN;
 }
 
 /** Disable JTAG/SWD I/O Pins.
@@ -254,7 +253,7 @@ static __forceinline uint32_t PIN_SWCLK_TCK_IN(void)
 /** SWCLK/TCK I/O pin: Set Output to High.
 Set the SWCLK/TCK DAP hardware I/O pin to high level.
 */
-static __forceinline void PIN_SWCLK_TCK_SET(void)
+static __forceinline void     PIN_SWCLK_TCK_SET(void)
 {
     SWCLK_TCK_PIN_PORT->BOR = SWCLK_TCK_PIN;
 }
@@ -262,7 +261,7 @@ static __forceinline void PIN_SWCLK_TCK_SET(void)
 /** SWCLK/TCK I/O pin: Set Output to Low.
 Set the SWCLK/TCK DAP hardware I/O pin to low level.
 */
-static __forceinline void PIN_SWCLK_TCK_CLR(void)
+static __forceinline void     PIN_SWCLK_TCK_CLR(void)
 {
     SWCLK_TCK_PIN_PORT->BCR = SWCLK_TCK_PIN;
 }
@@ -280,7 +279,7 @@ static __forceinline uint32_t PIN_SWDIO_TMS_IN(void)
 /** SWDIO/TMS I/O pin: Set Output to High.
 Set the SWDIO/TMS DAP hardware I/O pin to high level.
 */
-static __forceinline void PIN_SWDIO_TMS_SET(void)
+static __forceinline void     PIN_SWDIO_TMS_SET(void)
 {
     SWDIO_OUT_PIN_PORT->BOR = SWDIO_OUT_PIN;
 }
@@ -288,7 +287,7 @@ static __forceinline void PIN_SWDIO_TMS_SET(void)
 /** SWDIO/TMS I/O pin: Set Output to Low.
 Set the SWDIO/TMS DAP hardware I/O pin to low level.
 */
-static __forceinline void PIN_SWDIO_TMS_CLR(void)
+static __forceinline void     PIN_SWDIO_TMS_CLR(void)
 {
     SWDIO_OUT_PIN_PORT->BCR = SWDIO_OUT_PIN;
 }
@@ -304,7 +303,7 @@ static __forceinline uint32_t PIN_SWDIO_IN(void)
 /** SWDIO I/O pin: Set Output (used in SWD mode only).
 \param bit Output value for the SWDIO DAP hardware I/O pin.
 */
-static __forceinline void PIN_SWDIO_OUT(uint32_t bit)
+static __forceinline void     PIN_SWDIO_OUT(uint32_t bit)
 {
     if (bit & 1)
         SWDIO_OUT_PIN_PORT->BOR = SWDIO_OUT_PIN;
@@ -316,7 +315,7 @@ static __forceinline void PIN_SWDIO_OUT(uint32_t bit)
 Configure the SWDIO DAP hardware I/O pin to output mode. This function is
 called prior \ref PIN_SWDIO_OUT function calls.
 */
-static __forceinline void PIN_SWDIO_OUT_ENABLE(void)
+static __forceinline void     PIN_SWDIO_OUT_ENABLE(void)
 {
     pin_out(SWDIO_OUT_PIN_PORT, SWDIO_OUT_PIN_Bit);
     SWDIO_OUT_PIN_PORT->BCR = SWDIO_OUT_PIN;
@@ -326,7 +325,7 @@ static __forceinline void PIN_SWDIO_OUT_ENABLE(void)
 Configure the SWDIO DAP hardware I/O pin to input mode. This function is
 called prior \ref PIN_SWDIO_IN function calls.
 */
-static __forceinline void PIN_SWDIO_OUT_DISABLE(void)
+static __forceinline void     PIN_SWDIO_OUT_DISABLE(void)
 {
     pin_in(SWDIO_OUT_PIN_PORT, SWDIO_OUT_PIN_Bit, 0);
     SWDIO_OUT_PIN_PORT->BOR = SWDIO_OUT_PIN;
@@ -346,7 +345,7 @@ static __forceinline uint32_t PIN_TDI_IN(void)
 /** TDI I/O pin: Set Output.
 \param bit Output value for the TDI DAP hardware I/O pin.
 */
-static __forceinline void PIN_TDI_OUT(uint32_t bit)
+static __forceinline void     PIN_TDI_OUT(uint32_t bit)
 {
     ;             // Not available
 }
@@ -378,7 +377,7 @@ static __forceinline uint32_t PIN_nTRST_IN(void)
            - 0: issue a JTAG TRST Test Reset.
            - 1: release JTAG TRST Test Reset.
 */
-static __forceinline void PIN_nTRST_OUT(uint32_t bit)
+static __forceinline void     PIN_nTRST_OUT(uint32_t bit)
 {
     ;             // Not available
 }
@@ -470,18 +469,18 @@ static __inline void DAP_SETUP(void)
     RCC_APB2PeriphClock_Enable(RCC_APB2PERIPH_GPIOA|RCC_APB2PERIPH_GPIOB|RCC_APB2PERIPH_GPIOC, ENABLE);
     // SWCLK_TCK_PIN  output
     pin_out(SWCLK_TCK_PIN_PORT, SWCLK_TCK_PIN_Bit);
-    SWCLK_TCK_PIN_PORT->BOR = SWCLK_TCK_PIN; 
-    // SWDIO_OUT output 
+    SWCLK_TCK_PIN_PORT->BOR = SWCLK_TCK_PIN;
+    // SWDIO_OUT output
     pin_out(SWDIO_OUT_PIN_PORT, SWDIO_OUT_PIN_Bit);
-    SWDIO_OUT_PIN_PORT->BOR = SWDIO_OUT_PIN;  
+    SWDIO_OUT_PIN_PORT->BOR = SWDIO_OUT_PIN;
     // SWDIO_IN  input pullup
     pin_in(SWDIO_IN_PIN_PORT, SWDIO_IN_PIN_Bit, 2);
-    // nRESET_PIN output 
+    // nRESET_PIN output
     pin_out(nRESET_PIN_PORT, nRESET_PIN_Bit);
-    nRESET_PIN_PORT->BOR = nRESET_PIN;    
-    // Connected LED 
+    nRESET_PIN_PORT->BOR = nRESET_PIN;
+    // Connected LED
     pin_out(CONNECTED_LED_PORT, CONNECTED_LED_PIN_Bit);
-    CONNECTED_LED_PORT->BOR = CONNECTED_LED_PIN;    
+    CONNECTED_LED_PORT->BOR = CONNECTED_LED_PIN;
 }
 
 /** Reset Target Device with custom specific I/O pin or command sequence.
