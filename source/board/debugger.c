@@ -21,10 +21,12 @@
 
 const char *board_id = "1093";
 #include "target_config.h"
+#include "flash_manager.h"
 
 void prerun_board_config(void)
 {
     target_device = target_device_nrf52840;
+    flash_manager_set_page_erase(true);
 }
 
 void prerun_target_config(void)
