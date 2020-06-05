@@ -46,11 +46,11 @@ COMPILER_ASSERT(DAPLINK_HIC_ID == DAPLINK_HIC_ID_GD32F103CB);
 #define POWER_EN_PIN                 GPIO_PIN_15
 #define POWER_EN_Bit                 15
 
-//Press and power, enter bootloader 7
+//Press and power, enter bootloader
 //When daplnk_if, reset target board
-#define nRESET_PIN_PORT              GPIOB
-#define nRESET_PIN                   GPIO_PIN_7
-#define nRESET_PIN_Bit               7
+#define nRESET_PIN_PORT              GPIOA
+#define nRESET_PIN                   GPIO_PIN_4
+#define nRESET_PIN_Bit               4
 
 //SWD
 #define SWCLK_TCK_PIN_PORT           GPIOB
@@ -83,5 +83,9 @@ COMPILER_ASSERT(DAPLINK_HIC_ID == DAPLINK_HIC_ID_GD32F103CB);
 #define PIN_MSC_LED                  GPIO_PIN_6
 #define PIN_MSC_LED_Bit              6
 
+//Button
+#define RESET_BUTTON_PORT            GPIOB
+#define RESET_BUTTON_PIN             GPIO_PIN_7
+#define RESET_BUTTON_PIN_BIT         7
 
 #endif

@@ -63,10 +63,17 @@ void gpio_init(void)
     GPIO_Init(CONNECTED_LED_PORT, &GPIO_InitStructure);
     GPIO_ResetBits(CONNECTED_LED_PORT, CONNECTED_LED_PIN);
 
+    // nRESET pin configuration
+     HAL_GPIO_WritePin(nRESET_PIN_PORT, nRESET_PIN, GPIO_PIN_SET);
+    GPIO_InitStructure.Pin = nRESET_PIN;
+    GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_OD;
+    GPIO_InitStructure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(nRESET_PIN_PORT, &GPIO_InitStructure);
+
     // reset button configured as gpio input_pullup
     GPIO_InitStructure.GPIO_Mode = GPIO_MODE_IPU;
-    GPIO_InitStructure.GPIO_Pin  = nRESET_PIN;
-    GPIO_Init(nRESET_PIN_PORT, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin  = RESET_BUTTON_PIN;
+    GPIO_Init(RESET_BUTTON_PORT, &GPIO_InitStructure);
 
     // Keep powered off in bootloader mode
     // to prevent the target from effecting the state
@@ -114,10 +121,10 @@ uint8_t gpio_get_sw_reset(void)
     uint8_t reset_forward_pressed;
     uint8_t reset_pressed;
 
-    // Set nRESET_PIN to input pull-up, then read status
-    pin_in(nRESET_PIN_PORT, nRESET_PIN_Bit, 2);
+    // Set RESET_BUTTON_PIN to input pull-up, then read status
+    pin_in(RESET_BUTTON_PORT, RESET_BUTTON_PIN_BIT, 2);
     busy_wait(5);
-    reset_forward_pressed = (nRESET_PIN_PORT->DIR & nRESET_PIN) ? 0 : 1;
+    reset_forward_pressed = (RESET_BUTTON_PORT->DIR & RESET_BUTTON_PIN) ? 0 : 1;
     // Forward reset if the state of the button has changed
     //    This must be done on button changes so it does not interfere
     //    with other reset sources such as programming or CDC Break
@@ -132,10 +139,10 @@ uint8_t gpio_get_sw_reset(void)
 #endif
         last_reset_forward_pressed = reset_forward_pressed;
     }
-    reset_pressed = reset_forward_pressed || ((nRESET_PIN_PORT->DIR & nRESET_PIN) ? 0 : 1);
-    // Config nRESET_PIN to output
-    pin_out(nRESET_PIN_PORT, nRESET_PIN_Bit);
-    nRESET_PIN_PORT->BOR = nRESET_PIN;
+    reset_pressed = reset_forward_pressed || ((RESET_BUTTON_PORT->DIR & RESET_BUTTON_PIN) ? 0 : 1);
+    // Config RESET_BUTTON_PIN to output
+    pin_out(RESET_BUTTON_PORT, RESET_BUTTON_PIN_BIT);
+    RESET_BUTTON_PORT->BOR = RESET_BUTTON_PIN;
 
     return !reset_pressed;
 }
