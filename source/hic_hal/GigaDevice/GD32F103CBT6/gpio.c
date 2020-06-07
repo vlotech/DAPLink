@@ -63,13 +63,6 @@ void gpio_init(void)
     GPIO_Init(CONNECTED_LED_PORT, &GPIO_InitStructure);
     GPIO_ResetBits(CONNECTED_LED_PORT, CONNECTED_LED_PIN);
 
-    // nRESET pin configuration
-     HAL_GPIO_WritePin(nRESET_PIN_PORT, nRESET_PIN, GPIO_PIN_SET);
-    GPIO_InitStructure.Pin = nRESET_PIN;
-    GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_OD;
-    GPIO_InitStructure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(nRESET_PIN_PORT, &GPIO_InitStructure);
-
     // reset button configured as gpio input_pullup
     GPIO_InitStructure.GPIO_Mode = GPIO_MODE_IPU;
     GPIO_InitStructure.GPIO_Pin  = RESET_BUTTON_PIN;
