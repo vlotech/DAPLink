@@ -52,7 +52,7 @@ static char string_board_id[4 + 1];
 static char string_host_id[32 + 1];
 static char string_target_id[32 + 1];
 static char string_hic_id[8 + 1];
-static char string_version[4 + 1];
+static char string_version[6 + 1];
 
 static char usb_desc_unique_id[2 + sizeof(string_unique_id) * 2];
 
@@ -133,6 +133,8 @@ static void setup_basics()
     string_version[idx++] = '0' + (DAPLINK_VERSION / 100) % 10;
     string_version[idx++] = '0' + (DAPLINK_VERSION / 10) % 10;
     string_version[idx++] = '0' + (DAPLINK_VERSION / 1) % 10;
+    string_version[idx++] = '.';
+    string_version[idx++] = '0' + MINOR_VERSION % 10;
     string_version[idx++] = 0;
 }
 
