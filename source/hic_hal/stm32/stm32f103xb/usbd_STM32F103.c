@@ -226,7 +226,7 @@ void USBD_Reset(void)
         pBUF_DSCR->COUNT_RX =   USBD_MAX_PACKET0 << 9;
     }
 
-    EPxREG(0) = EP_CONTROL | EP_RX_VALID;
+    EPxREG(0) = EP_CONTROL | EP_RX_VALID | EP_TX_NAK | EP_DTOG_TX;
     DADDR = DADDR_EF | 0;                 /* Enable USB Default Address         */
 
     NVIC_EnableIRQ(USB_LP_CAN1_RX0_IRQn);
