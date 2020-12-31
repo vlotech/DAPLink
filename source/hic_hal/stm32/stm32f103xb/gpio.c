@@ -38,6 +38,7 @@ static void busy_wait(uint32_t cycles)
     }
 }
 
+#ifdef OUTPUT_CLOCK_ENABLE
 static uint32_t tim1_clk_div(uint32_t apb2clkdiv)
 {
     switch (apb2clkdiv) {
@@ -112,6 +113,7 @@ static void output_clock_enable(void)
 
     return;
 }
+#endif
 
 void gpio_init(void)
 {
@@ -134,7 +136,7 @@ void gpio_init(void)
     GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(USB_CONNECT_PORT, &GPIO_InitStructure);
     // configure LEDs
-    HAL_GPIO_WritePin(RUNNING_LED_PORT, RUNNING_LED_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RUNNING_LED_PORT, RUNNING_LED_PIN, GPIO_PIN_RESET);
     GPIO_InitStructure.Pin = RUNNING_LED_PIN;
     GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
@@ -173,12 +175,14 @@ void gpio_init(void)
     GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(POWER_EN_PIN_PORT, &GPIO_InitStructure);
 
+#if OUTPUT_CLOCK_ENABLE
     // Setup the 8MHz MCO
     GPIO_InitStructure.Pin = GPIO_PIN_8;
     GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
     output_clock_enable();
+#endif
 
     // Let the voltage rails stabilize.  This is especailly important
     // during software resets, since the target's 3.3v rail can take
