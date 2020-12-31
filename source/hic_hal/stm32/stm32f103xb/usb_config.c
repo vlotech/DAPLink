@@ -209,7 +209,7 @@
 #define USBD_MSC_STRDESC            L"USB_MSC"
 // Make sure changes to USBD_MSC_INQUIRY_DATA are coordinated with mbed-ls
 // since this is used to detect DAPLink drives
-#define USBD_MSC_INQUIRY_DATA       "MBED    "         \
+#define USBD_MSC_INQUIRY_DATA       "PARTICLE"         \
                                     "VFS             " \
                                     "0.1"
 
@@ -333,8 +333,8 @@
 #define USBD_CDC_ACM_HS_ENABLE1         0
 #define USBD_CDC_ACM_HS_WMAXPACKETSIZE1 16
 #define USBD_CDC_ACM_HS_BINTERVAL1      0
-#define USBD_CDC_ACM_CIF_STRDESC        L"mbed Serial Port"
-#define USBD_CDC_ACM_DIF_STRDESC        L"mbed Serial Port"
+#define USBD_CDC_ACM_CIF_STRDESC        L"Particle Serial Port"
+#define USBD_CDC_ACM_DIF_STRDESC        L"Particle Serial Port"
 #define USBD_CDC_ACM_SENDBUF_SIZE       64
 #define USBD_CDC_ACM_RECEIVEBUF_SIZE    64
 #if (((USBD_CDC_ACM_HS_ENABLE1) && (USBD_CDC_ACM_SENDBUF_SIZE    < USBD_CDC_ACM_HS_WMAXPACKETSIZE1)) || (USBD_CDC_ACM_SENDBUF_SIZE    < USBD_CDC_ACM_WMAXPACKETSIZE1))

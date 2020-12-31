@@ -43,11 +43,11 @@ static const uint32_t disc_size = MB(64);
 
 static const char mbed_redirect_file[] =
     "<!doctype html>\r\n"
-    "<!-- mbed Platform Website and Authentication Shortcut -->\r\n"
+    "<!-- Particle Platform Website and Authentication Shortcut -->\r\n"
     "<html>\r\n"
     "<head>\r\n"
     "<meta charset=\"utf-8\">\r\n"
-    "<title>mbed Website Shortcut</title>\r\n"
+    "<title>Particle Website Shortcut</title>\r\n"
     "</head>\r\n"
     "<body>\r\n"
     "<script>\r\n"
@@ -89,7 +89,7 @@ void vfs_user_build_filesystem()
     vfs_file_t file_handle;
     // Setup the filesystem based on target parameters
     vfs_init(get_daplink_drive_name(), disc_size);
-    // MBED.HTM
+    // PARTICLE.HTM
     file_size = get_file_size(read_file_mbed_htm);
     vfs_create_file(get_daplink_url_name(), read_file_mbed_htm, 0, file_size);
     // DETAILS.TXT

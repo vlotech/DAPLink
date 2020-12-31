@@ -63,9 +63,9 @@ const char * get_board_id(void);
 uint16_t get_family_id(void);
 uint8_t flash_algo_valid(void);
 
-static inline const char * get_daplink_url_name ( void ) { return ((g_board_info.daplink_url_name[0] != 0) ? g_board_info.daplink_url_name : "MBED    HTM"); }
+static inline const char * get_daplink_url_name ( void ) { return ((g_board_info.daplink_url_name[0] != 0) ? g_board_info.daplink_url_name : "PARTICLEHTM"); }
 static inline const char * get_daplink_drive_name ( void ) { return ((g_board_info.daplink_drive_name[0] != 0) ? g_board_info.daplink_drive_name : "DAPLINK    "); }
-static inline const char * get_daplink_target_url ( void ) { return ((g_board_info.daplink_target_url[0] != 0) ? g_board_info.daplink_target_url : "https://mbed.org/device/?code=@U?version=@V?target_id=@T"); }
+static inline const char * get_daplink_target_url ( void ) { return ((g_board_info.daplink_target_url[0] != 0) ? g_board_info.daplink_target_url : "https://particle.io"); }
 
 #ifdef __cplusplus
 }
