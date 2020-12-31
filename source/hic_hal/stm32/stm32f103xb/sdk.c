@@ -70,7 +70,7 @@ void sdk_init()
     RCC_OscInitStruct.HSEState = RCC_CR_HSEON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV2;
     RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
         /* Initialization Error */
@@ -87,6 +87,13 @@ void sdk_init()
         /* Initialization Error */
         util_assert(0);
     }
+
+#if OS_CLOCK == 72000000
+    // If clock=96MHZ, use 0x00C00000; if clock=72MHZ, use 0x00000000
+    __HAL_RCC_USB_CONFIG(0x00000000);
+#else
+#error Please reconfigure USB clock
+#endif
 }
 
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
