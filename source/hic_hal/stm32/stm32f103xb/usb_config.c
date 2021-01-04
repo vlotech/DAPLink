@@ -142,13 +142,8 @@
 #endif
 
 #define USBD_HID_ENABLE             HID_ENDPOINT
-#ifndef BULK_ENDPOINT               //check if bulk endpoint is not enabled
 #define USBD_HID_EP_INTIN           1
 #define USBD_HID_EP_INTOUT          1
-#else                               //if bulk endpoint is enabled remove interrupt endpoints from the hid
-#define USBD_HID_EP_INTIN           0
-#define USBD_HID_EP_INTOUT          0
-#endif
 #define USBD_HID_EP_INTIN_STACK     0
 #define USBD_HID_WMAXPACKETSIZE     64
 #define USBD_HID_BINTERVAL          1
@@ -380,8 +375,8 @@
 #define BULK_ENDPOINT 1
 #endif
 #define USBD_BULK_ENABLE             BULK_ENDPOINT
-#define USBD_BULK_EP_BULKIN          1 // fixme: both bulk and hid ep cannot be both enabled in a single build
-#define USBD_BULK_EP_BULKOUT         1
+#define USBD_BULK_EP_BULKIN          5
+#define USBD_BULK_EP_BULKOUT         5
 #define USBD_BULK_EP_BULKIN_SWO      6
 #define USBD_BULK_WMAXPACKETSIZE     64
 #define USBD_BULK_HS_ENABLE          0
@@ -407,7 +402,7 @@
 #if    (USBD_HID_ENABLE)
 #if    (USBD_MSC_ENABLE)
 #if ((((USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKIN)  || \
-       (USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKIN)))|| \
+       (USBD_HID_EP_INTIN   == USBD_MSC_EP_BULKOUT)))|| \
       ((USBD_HID_EP_INTOUT  != 0)                   && \
        (USBD_HID_EP_INTOUT  == USBD_MSC_EP_BULKIN)  || \
        (USBD_HID_EP_INTOUT  == USBD_MSC_EP_BULKOUT)))
