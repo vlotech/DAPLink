@@ -173,6 +173,8 @@ static void __attribute__((optimize("O0"))) setup_basics(void)
     string_version[idx++] = '0' + (DAPLINK_VERSION / 100) % 10;
     string_version[idx++] = '0' + (DAPLINK_VERSION / 10) % 10;
     string_version[idx++] = '0' + (DAPLINK_VERSION / 1) % 10;
+    string_version[idx++] = '.';
+    string_version[idx++] = '2';
     string_version[idx++] = 0;
 }
 
