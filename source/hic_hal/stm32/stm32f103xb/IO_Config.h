@@ -82,5 +82,9 @@ COMPILER_ASSERT(DAPLINK_HIC_ID == DAPLINK_HIC_ID_STM32F103XB);
 #define PIN_MSC_LED                  GPIO_PIN_5
 #define PIN_MSC_LED_Bit              5
 
+// Reset Button
+#define RESET_BUTTON_PORT            GPIOB
+#define RESET_BUTTON_PIN             GPIO_PIN_7
+#define RESET_BUTTON_PIN_BIT         7
 
 #endif
