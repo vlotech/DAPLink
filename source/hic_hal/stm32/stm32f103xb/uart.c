@@ -212,6 +212,10 @@ int32_t uart_get_configuration(UART_Configuration *config)
 
 void uart_set_control_line_state(uint16_t ctrl_bmp)
 {
+    if(ctrl_bmp & 0x02)
+        HAL_GPIO_WritePin(UART_RTS_PORT, UART_RTS_PIN, GPIO_PIN_SET);
+    else
+        HAL_GPIO_WritePin(UART_RTS_PORT, UART_RTS_PIN, GPIO_PIN_RESET);
 }
 
 int32_t uart_write_free(void)

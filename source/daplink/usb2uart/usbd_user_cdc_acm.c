@@ -137,6 +137,9 @@ int32_t USBD_CDC_ACM_SendBreak(uint16_t dur)
     return (1);
 }
 
+
+__weak void uart_set_control_line_state(uint16_t ctrl_bmp);
+
 /** @brief  Virtual COM Port set control line state
  *
  *  The function sets control line state on the port used as the
